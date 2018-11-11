@@ -1,14 +1,32 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar no-border-bottom>
     <ion-title>
-      Ionic Blank
+      Clientes
     </ion-title>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="this.TipoCliente">
+      <ion-segment-button value="Generales">Generales</ion-segment-button>
+      <ion-segment-button value="Potenciales">Potenciales</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <div [ngSwitch]="this.TipoCliente">
+    <ng-container *ngFor="let contacto of this.Contactos[0]">
+      <ion-item *ngSwitchCase="'Generales'">
+        {{ contacto.razonSocial }} : {{ contacto.potencial }}
+      </ion-item>
+    </ng-container>
+    <ng-container *ngFor="let contacto of this.Contactos[1]">
+      <ion-item *ngSwitchCase="'Potenciales'">
+        {{ contacto.razonSocial }} : {{ contacto.potencial }}
+      </ion-item>
+    </ng-container>
+  </div>
+
 </ion-content>
